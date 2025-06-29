@@ -1,23 +1,39 @@
 // src/pages/Home.tsx
 import { Link } from 'react-router-dom';
+import { useTheme } from '../constants/ThemeContext';
 import logo from '@/assets/logo.png';
 
 const Home = () => {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+  
+  // Theme-aware colors
+  const primaryColor = isDark ? '#EC6435' : '#D45328';
+  const textColor = isDark ? 'text-white' : 'text-dark';
+  const mutedTextColor = isDark ? 'text-white/80' : 'text-dark/80';
+  const cardBg = isDark ? 'bg-dark/50' : 'bg-light-darker/50';
+  const cardBorder = isDark ? 'border-white/10' : 'border-dark/10';
+  
   return (
     <section className="relative min-h-screen overflow-hidden">
       {/* Background with logo pattern */}
       <div 
-        className="absolute inset-0 z-0 opacity-[0.03]"
+        className="absolute inset-0 z-0 opacity-[0.03] dark:opacity-[0.05]"
         style={{
           backgroundImage: `url(${logo})`,
           backgroundSize: '35%',
           backgroundPosition: 'center',
-          backgroundRepeat: 'repeat'
+          backgroundRepeat: 'repeat',
+          filter: isDark ? 'none' : 'invert(1)'
         }}
       />
       
       {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-dark/95 via-dark/80 to-dark z-0" />
+      <div className={`absolute inset-0 z-0 ${
+        isDark 
+          ? 'bg-gradient-to-b from-dark/95 via-dark/80 to-dark' 
+          : 'bg-gradient-to-b from-light/80 via-light/60 to-light'
+      }`} />
       
       {/* Animated particles */}
       <div className="absolute inset-0 z-0">
@@ -30,7 +46,7 @@ const Home = () => {
               left: `${Math.random() * 100}%`,
               width: `${Math.random() * 8 + 2}px`,
               height: `${Math.random() * 8 + 2}px`,
-              backgroundColor: '#EC6435',
+              backgroundColor: primaryColor,
               animation: `pulse ${Math.random() * 4 + 2}s infinite`,
               opacity: Math.random() * 0.4 + 0.1
             }}
@@ -50,13 +66,13 @@ const Home = () => {
           </div>
           
           <h1 className="text-5xl md:text-7xl font-bold mb-6">
-            <span className="text-white">We Build </span>
+            <span className={textColor}>We Build </span>
             <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
               Digital Excellence
             </span>
           </h1>
           
-          <p className="text-xl text-white/80 max-w-2xl mx-auto mb-10">
+          <p className={`text-xl ${mutedTextColor} max-w-2xl mx-auto mb-10`}>
             Smplics transforms visions into reality through cutting-edge solutions
             and strategic digital innovation for forward-thinking businesses.
           </p>
@@ -70,7 +86,11 @@ const Home = () => {
             </Link>
             <Link 
               to="/contact" 
-              className="bg-transparent border-2 border-white/20 hover:border-primary text-white font-bold py-4 px-8 rounded-full transition-all duration-300 hover:text-primary text-lg"
+              className={`bg-transparent border-2 ${
+                isDark ? 'border-white/20' : 'border-dark/20'
+              } hover:border-primary ${
+                isDark ? 'text-white' : 'text-dark'
+              } font-bold py-4 px-8 rounded-full transition-all duration-300 hover:text-primary text-lg`}
             >
               Contact Us
             </Link>
@@ -87,12 +107,12 @@ const Home = () => {
           ].map((stat, index) => (
             <div 
               key={index}
-              className="bg-dark/50 backdrop-blur-sm border border-white/10 rounded-xl p-6 transition-all hover:border-primary/30"
+              className={`${cardBg} backdrop-blur-sm border ${cardBorder} rounded-xl p-6 transition-all hover:border-primary/30`}
             >
               <div className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-2">
                 {stat.value}
               </div>
-              <div className="text-white/80 text-sm">{stat.label}</div>
+              <div className={`${mutedTextColor} text-sm`}>{stat.label}</div>
             </div>
           ))}
         </div>

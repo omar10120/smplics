@@ -1,6 +1,9 @@
+// src/components/layout/Header.tsx
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import logo from '@/assets/logo.png';
+import logoLight from '@/assets/logo.png'; // Optional light mode logo
+import ThemeSwitcher from '../components/ThemeSwitcher';
 
 const navLinks = [
   { name: 'Home', to: '/' },
@@ -28,10 +31,8 @@ const Header = () => {
   }, [location]);
 
   const handleNavigation = (to: string, sectionId?: string) => {
-    // Close mobile menu
     setMenuOpen(false);
     
-    // If we're already on the page, scroll to section
     if (location.pathname === to && sectionId) {
       const element = document.getElementById(sectionId);
       if (element) {
@@ -40,10 +41,8 @@ const Header = () => {
       }
     }
     
-
     navigate(to);
     
-
     if (sectionId) {
       setTimeout(() => {
         const element = document.getElementById(sectionId);
@@ -56,16 +55,25 @@ const Header = () => {
 
   return (
     <header 
-      className={`fixed w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-dark/95 backdrop-blur-sm py-2 shadow-lg' : 'bg-transparent py-4'
+      className={`fixed w-full z-50 transition-all duration-300   ${
+        scrolled 
+          ? 'bg-light/95 dark:bg-dark/95 backdrop-blur-sm py-2 shadow-lg bg-white  ' 
+          : 'bg-transparent py-4'
       }`}
     >
-      <div className="container mx-auto flex justify-between items-center px-4 md:px-8">
+      <div className="container mx-auto flex justify-between items-center px-4 md:px-8  ">
         <Link to="/" className="flex items-center z-50">
           <img 
-            src={logo} 
+            src={logo}
             alt="Company Logo"
-            className={`transition-all duration-300 ${
+            className={`transition-all duration-300 dark:block hidden ${
+              scrolled ? 'h-10 w-auto' : 'h-14 w-auto'
+            }`}
+          />
+          <img 
+            src={logoLight}
+            alt="Company Logo"
+            className={`transition-all duration-300 dark:hidden block ${
               scrolled ? 'h-10 w-auto' : 'h-14 w-auto'
             }`}
           />
@@ -77,10 +85,10 @@ const Header = () => {
             <button
               key={link.name}
               onClick={() => handleNavigation(link.to, link.sectionId)}
-              className={`relative px-1 py-2 font-medium transition-colors ${
-                location.pathname === link.to 
-                  ? 'text-primary' 
-                  : 'text-primary/80 hover:text-primary'
+              className={`relative px-1 py-2 font-medium transition-colors  ${
+                location.pathname === link.to
+                  ? `text-primary ${scrolled  && location.pathname != link.to? 'text-light' : ''} `
+                  : `text-dark dark:text-light-darker hover:text-primary   ${scrolled  && location.pathname != link.to? 'dark:text-light-darker' : 'dark:text'}`
               }`}
             >
               {link.name}
@@ -89,37 +97,49 @@ const Header = () => {
               )}
             </button>
           ))}
-          <button 
-            onClick={() => handleNavigation('/contact', 'contact-section')}
-            className="bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary text-dark font-bold py-2 px-6 rounded-full transition-all duration-300 transform hover:-translate-y-0.5 shadow-lg hover:shadow-xl"
-          >
-            Get Started
-          </button>
+          
+          <div className="flex items-center gap-4 ml-4">
+            <ThemeSwitcher />
+            <button 
+              onClick={() => handleNavigation('/contact', 'contact-section')}
+              className="bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary text-dark font-bold py-2 px-6 rounded-full transition-all duration-300 transform hover:-translate-y-0.5 shadow-lg hover:shadow-xl"
+            >
+              Get Started
+            </button>
+          </div>
         </nav>
 
         {/* Mobile Menu Button */}
-        <button
-          className="md:hidden relative z-50 w-10 h-10 flex flex-col justify-center items-center"
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          <span className={`block w-6 h-0.5 bg-white rounded-full transition-transform duration-300 ${menuOpen ? 'rotate-45 translate-y-1' : ''}`} />
-          <span className={`block w-6 h-0.5 bg-white mt-1 rounded-full transition-opacity duration-300 ${menuOpen ? 'opacity-0' : 'opacity-100'}`} />
-          <span className={`block w-6 h-0.5 bg-white mt-1 rounded-full transition-transform duration-300 ${menuOpen ? '-rotate-45 -translate-y-1' : ''}`} />
-        </button>
+        <div className="flex items-center gap-4 md:hidden">
+          <ThemeSwitcher />
+          <button
+            className="relative z-50 w-10 h-10 flex flex-col justify-center items-center"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            <span className={`block w-6 h-0.5 bg-dark dark:bg-light rounded-full transition-transform duration-300 ${menuOpen ? 'rotate-45 translate-y-1' : ''}`} />
+            <span className={`block w-6 h-0.5 bg-dark dark:bg-light mt-1 rounded-full transition-opacity duration-300 ${menuOpen ? 'opacity-0' : 'opacity-100'}`} />
+            <span className={`block w-6 h-0.5 bg-dark dark:bg-light mt-1 rounded-full transition-transform duration-300 ${menuOpen ? '-rotate-45 -translate-y-1' : ''}`} />
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
       <div 
-        className={`md:hidden fixed inset-0 bg-dark/95 backdrop-blur-lg z-40 transition-all duration-500 ease-in-out ${
+        className={`md:hidden fixed inset-0 bg-light/95 dark:bg-dark/95 backdrop-blur-lg z-40 transition-all duration-500 ease-in-out ${
           menuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full'
         }`}
         style={{ paddingTop: '5rem' }}
       >
         <div className="absolute top-8 left-4">
           <img 
-            src={logo} 
+            src={logo}
             alt="Company Logo"
-            className="h-12 w-auto"
+            className="h-12 w-auto dark:block hidden"
+          />
+          <img 
+            src={logoLight}
+            alt="Company Logo"
+            className="h-12 w-auto dark:hidden block"
           />
         </div>
         
@@ -131,7 +151,7 @@ const Header = () => {
               className={`text-2xl font-medium transition-colors ${
                 location.pathname === link.to 
                   ? 'text-primary' 
-                  : 'text-white hover:text-primary'
+                  : 'text-dark dark:text-light hover:text-primary'
               }`}
             >
               {link.name}

@@ -1,9 +1,19 @@
 // src/components/layout/Footer.tsx
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { useTheme } from '../constants/ThemeContext';
 
 const Footer = () => {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
   const currentYear = new Date().getFullYear();
+  
+  // Theme-aware colors
+  const bgColor = isDark ? 'bg-dark' : 'bg-light';
+  const textColor = isDark ? 'text-white' : 'text-dark';
+  const mutedTextColor = isDark ? 'text-white/80' : 'text-dark/70';
+  // const cardBg = isDark ? 'bg-dark/80' : 'bg-light/80';
+  const cardBorder = isDark ? 'border-white/10' : 'border-dark/10';
   
   const footerLinks = [
     {
@@ -48,7 +58,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-dark text-white border-t border-white/10">
+    <footer className={`${bgColor} ${textColor} border-t ${cardBorder}`}>
       {/* Top section */}
       <div className="container mx-auto px-4 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
@@ -63,12 +73,14 @@ const Footer = () => {
               </div>
             </Link>
             
-            <p className="text-white/80 mb-6 max-w-xs">
+            <p className={`${mutedTextColor} mb-6 max-w-xs`}>
               Transforming businesses through innovative digital solutions and cutting-edge technology.
             </p>
             
             <div className="flex items-center gap-4 mb-6">
-              <div className="bg-primary/10 p-3 rounded-full">
+              <div className={`${
+                isDark ? 'bg-primary/10' : 'bg-primary/5'
+              } p-3 rounded-full`}>
                 <div className="w-5 h-5 bg-primary rounded-full" />
               </div>
               <div>
@@ -78,7 +90,9 @@ const Footer = () => {
             </div>
             
             <div className="flex items-center gap-4">
-              <div className="bg-primary/10 p-3 rounded-full">
+              <div className={`${
+                isDark ? 'bg-primary/10' : 'bg-primary/5'
+              } p-3 rounded-full`}>
                 <div className="w-5 h-5 bg-primary rounded-full" />
               </div>
               <div>
@@ -106,7 +120,7 @@ const Footer = () => {
                   <li key={linkIndex}>
                     <Link 
                       to={link.to}
-                      className="text-white/80 hover:text-primary transition-colors flex items-start"
+                      className={`${mutedTextColor} hover:text-primary transition-colors flex items-start`}
                     >
                       <span className="w-1.5 h-1.5 rounded-full bg-primary mt-2 mr-3" />
                       {link.name}
@@ -128,7 +142,7 @@ const Footer = () => {
               Newsletter
               <span className="absolute bottom-0 left-0 w-8 h-0.5 bg-gradient-to-r from-primary to-accent rounded-full" />
             </h3>
-            <p className="text-white/80 mb-6">
+            <p className={`${mutedTextColor} mb-6`}>
               Subscribe to our newsletter for the latest updates and offers.
             </p>
             
@@ -137,7 +151,9 @@ const Footer = () => {
                 <input
                   type="email"
                   placeholder="Your email address"
-                  className="flex-1 bg-dark/50 border border-white/10 rounded-lg px-4 py-3 focus:border-primary focus:ring-2 focus:ring-primary/50 outline-none transition-all"
+                  className={`flex-1 ${
+                    isDark ? 'bg-dark/50' : 'bg-light/50'
+                  } border ${cardBorder} rounded-lg px-4 py-3 focus:border-primary focus:ring-2 focus:ring-primary/50 outline-none transition-all ${textColor}`}
                 />
                 <button
                   type="submit"
@@ -158,9 +174,13 @@ const Footer = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     whileHover={{ y: -3 }}
-                    className="bg-white/5 hover:bg-primary/10 border border-white/10 rounded-lg p-3 transition-all"
+                    className={`${
+                      isDark ? 'bg-white/5' : 'bg-dark/5'
+                    } hover:bg-primary/10 border ${cardBorder} rounded-lg p-3 transition-all`}
                   >
-                    <div className="w-5 h-5 bg-white rounded-full" />
+                    <div className={`w-5 h-5 ${
+                      isDark ? 'bg-white' : 'bg-dark'
+                    } rounded-full`} />
                     <span className="sr-only">{social.name}</span>
                   </motion.a>
                 ))}
@@ -171,10 +191,10 @@ const Footer = () => {
       </div>
       
       {/* Bottom section */}
-      <div className="border-t border-white/10">
+      <div className={`border-t ${cardBorder}`}>
         <div className="container mx-auto px-4 py-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-white/60 text-sm">
+            <p className={`${mutedTextColor} text-sm`}>
               &copy; {currentYear} Smplics. All rights reserved.
             </p>
             
@@ -183,7 +203,7 @@ const Footer = () => {
                 <a 
                   key={index}
                   href="#"
-                  className="text-white/60 hover:text-primary text-sm transition-colors"
+                  className={`${mutedTextColor} hover:text-primary text-sm transition-colors`}
                 >
                   {item}
                 </a>
@@ -191,19 +211,25 @@ const Footer = () => {
             </div>
             
             <div className="flex items-center gap-2">
-              <span className="text-white/60 text-sm">Designed with</span>
+              <span className={`${mutedTextColor} text-sm`}>Designed with</span>
               <div className="w-5 h-5 bg-primary rounded-full relative">
-                <div className="absolute inset-0 animate-ping bg-primary rounded-full opacity-30" />
+                <div className={`absolute inset-0 animate-ping ${
+                  isDark ? 'bg-primary/30' : 'bg-primary/20'
+                } rounded-full`} />
               </div>
-              <span className="text-white/60 text-sm">in Tech City</span>
+              <span className={`${mutedTextColor} text-sm`}>in Tech City</span>
             </div>
           </div>
         </div>
       </div>
       
       {/* Decorative elements */}
-      <div className="absolute bottom-0 left-0 w-40 h-40 rounded-full bg-primary/10 blur-3xl -z-10" />
-      <div className="absolute top-0 right-0 w-60 h-60 rounded-full bg-accent/10 blur-3xl -z-10" />
+      <div className={`absolute bottom-0 left-0 w-40 h-40 rounded-full ${
+        isDark ? 'bg-primary/10' : 'bg-primary/5'
+      } blur-3xl -z-10`} />
+      <div className={`absolute top-0 right-0 w-60 h-60 rounded-full ${
+        isDark ? 'bg-accent/10' : 'bg-accent/5'
+      } blur-3xl -z-10`} />
     </footer>
   );
 };

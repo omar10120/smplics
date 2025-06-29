@@ -2,8 +2,11 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { Mail, Phone, MapPin, Clock, Send, Check } from 'react-feather';
+import { useTheme } from '../constants/ThemeContext';
 
 const ContactPage = () => {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -12,6 +15,13 @@ const ContactPage = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+
+  // Theme-aware colors
+  const bgColor = isDark ? 'bg-dark' : 'bg-light';
+  const textColor = isDark ? 'text-white' : 'text-dark';
+  const mutedTextColor = isDark ? 'text-white/80' : 'text-dark/70';
+  const cardBg = isDark ? 'bg-dark/80' : 'bg-light/80';
+  const cardBorder = isDark ? 'border-white/10' : 'border-dark/10';
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -80,12 +90,18 @@ const ContactPage = () => {
   ];
 
   return (
-    <div className="bg-dark text-white" id='contact-section'>
+    <div className={`${bgColor} ${textColor}`} id='contact-section'>
       {/* Hero Section */}
-      <section className="relative py-24 overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-primary/10 to-transparent z-0" />
-        <div className="absolute top-1/4 left-1/4 w-80 h-80 rounded-full bg-accent/10 blur-3xl z-0" />
-        <div className="absolute bottom-20 right-20 w-60 h-60 rounded-full bg-primary/10 blur-3xl z-0" />
+      <section className={`relative py-24 overflow-hidden ${bgColor}`}>
+        <div className={`absolute top-0 left-0 w-full h-full bg-gradient-to-b ${
+          isDark ? 'from-primary/10' : 'from-primary/5'
+        } to-transparent z-0`} />
+        <div className={`absolute top-1/4 left-1/4 w-80 h-80 rounded-full ${
+          isDark ? 'bg-accent/10' : 'bg-accent/5'
+        } blur-3xl z-0`} />
+        <div className={`absolute bottom-20 right-20 w-60 h-60 rounded-full ${
+          isDark ? 'bg-primary/10' : 'bg-primary/5'
+        } blur-3xl z-0`} />
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
@@ -113,7 +129,7 @@ const ContactPage = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-xl text-white/80 max-w-2xl mx-auto"
+              className={`text-xl ${mutedTextColor} max-w-2xl mx-auto`}
             >
               We're here to answer your questions and discuss how we can help your business thrive in the digital world.
             </motion.p>
@@ -132,17 +148,19 @@ const ContactPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-dark/80 backdrop-blur-sm border border-white/10 rounded-xl p-6 hover:border-primary/30 transition-all duration-300"
+                className={`${cardBg} backdrop-blur-sm border ${cardBorder} rounded-xl p-6 hover:border-primary/30 transition-all duration-300`}
               >
                 <div className="mb-4">
-                  <div className="bg-primary/10 p-3 rounded-full inline-block">
+                  <div className={`${
+                    isDark ? 'bg-primary/10' : 'bg-primary/5'
+                  } p-3 rounded-full inline-block`}>
                     {item.icon}
                   </div>
                 </div>
                 <h3 className="text-xl font-bold mb-3">{item.title}</h3>
                 <ul className="space-y-2 mb-4">
                   {item.details.map((detail, i) => (
-                    <li key={i} className="text-white/80">{detail}</li>
+                    <li key={i} className={mutedTextColor}>{detail}</li>
                   ))}
                 </ul>
                 <button className="text-primary font-medium hover:opacity-80 transition-opacity">
@@ -156,7 +174,9 @@ const ContactPage = () => {
 
       {/* Contact Form & Map */}
       <section className="py-16 relative">
-        <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b from-dark to-dark/70 z-0" />
+        <div className={`absolute top-0 left-0 w-full h-1/2 bg-gradient-to-b ${
+          isDark ? 'from-dark' : 'from-light'
+        } to-transparent z-0`} />
         <div className="container mx-auto px-4 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Contact Form */}
@@ -165,11 +185,11 @@ const ContactPage = () => {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7 }}
               viewport={{ once: true }}
-              className="bg-dark/80 backdrop-blur-sm border border-white/10 rounded-2xl p-8"
+              className={`${cardBg} backdrop-blur-sm border ${cardBorder} rounded-2xl p-8`}
             >
               <div className="mb-8">
                 <h2 className="text-3xl font-bold mb-3">Send Us a Message</h2>
-                <p className="text-white/80">Have questions or ready to start your project? Fill out the form below and our team will get back to you promptly.</p>
+                <p className={mutedTextColor}>Have questions or ready to start your project? Fill out the form below and our team will get back to you promptly.</p>
               </div>
 
               {isSubmitted ? (
@@ -178,11 +198,13 @@ const ContactPage = () => {
                   animate={{ opacity: 1, scale: 1 }}
                   className="text-center py-12"
                 >
-                  <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-primary/10 mb-6">
+                  <div className={`inline-flex items-center justify-center w-20 h-20 rounded-full ${
+                    isDark ? 'bg-primary/10' : 'bg-primary/5'
+                  } mb-6`}>
                     <Check className="text-primary" size={40} />
                   </div>
                   <h3 className="text-2xl font-bold mb-2">Message Sent!</h3>
-                  <p className="text-white/80 mb-6">
+                  <p className={`${mutedTextColor} mb-6`}>
                     Thank you for contacting us. We'll get back to you within 24 hours.
                   </p>
                   <button 
@@ -196,53 +218,61 @@ const ContactPage = () => {
                 <form onSubmit={handleSubmit}>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>
-                      <label htmlFor="name" className="block text-sm font-medium mb-2">Full Name</label>
+                      <label htmlFor="name" className={`block text-sm font-medium mb-2 ${textColor}`}>Full Name</label>
                       <input
                         type="text"
                         id="name"
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
-                        className="w-full bg-dark/50 border border-white/10 rounded-lg px-4 py-3 focus:border-primary focus:ring-2 focus:ring-primary/50 outline-none transition-all"
+                        className={`w-full ${
+                          isDark ? 'bg-dark/50' : 'bg-light/50'
+                        } border ${cardBorder} rounded-lg px-4 py-3 focus:border-primary focus:ring-2 focus:ring-primary/50 outline-none transition-all ${textColor}`}
                         required
                       />
                     </div>
                     <div>
-                      <label htmlFor="email" className="block text-sm font-medium mb-2">Email Address</label>
+                      <label htmlFor="email" className={`block text-sm font-medium mb-2 ${textColor}`}>Email Address</label>
                       <input
                         type="email"
                         id="email"
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
-                        className="w-full bg-dark/50 border border-white/10 rounded-lg px-4 py-3 focus:border-primary focus:ring-2 focus:ring-primary/50 outline-none transition-all"
+                        className={`w-full ${
+                          isDark ? 'bg-dark/50' : 'bg-light/50'
+                        } border ${cardBorder} rounded-lg px-4 py-3 focus:border-primary focus:ring-2 focus:ring-primary/50 outline-none transition-all ${textColor}`}
                         required
                       />
                     </div>
                   </div>
                   
                   <div className="mb-6">
-                    <label htmlFor="subject" className="block text-sm font-medium mb-2">Subject</label>
+                    <label htmlFor="subject" className={`block text-sm font-medium mb-2 ${textColor}`}>Subject</label>
                     <input
                       type="text"
                       id="subject"
                       name="subject"
                       value={formData.subject}
                       onChange={handleChange}
-                      className="w-full bg-dark/50 border border-white/10 rounded-lg px-4 py-3 focus:border-primary focus:ring-2 focus:ring-primary/50 outline-none transition-all"
+                      className={`w-full ${
+                          isDark ? 'bg-dark/50' : 'bg-light/50'
+                        } border ${cardBorder} rounded-lg px-4 py-3 focus:border-primary focus:ring-2 focus:ring-primary/50 outline-none transition-all ${textColor}`}
                       required
                     />
                   </div>
                   
                   <div className="mb-6">
-                    <label htmlFor="message" className="block text-sm font-medium mb-2">Your Message</label>
+                    <label htmlFor="message" className={`block text-sm font-medium mb-2 ${textColor}`}>Your Message</label>
                     <textarea
                       id="message"
                       name="message"
                       value={formData.message}
                       onChange={handleChange}
                       rows={5}
-                      className="w-full bg-dark/50 border border-white/10 rounded-lg px-4 py-3 focus:border-primary focus:ring-2 focus:ring-primary/50 outline-none transition-all"
+                      className={`w-full ${
+                          isDark ? 'bg-dark/50' : 'bg-light/50'
+                        } border ${cardBorder} rounded-lg px-4 py-3 focus:border-primary focus:ring-2 focus:ring-primary/50 outline-none transition-all ${textColor}`}
                       required
                     />
                   </div>
@@ -280,18 +310,30 @@ const ContactPage = () => {
               transition={{ duration: 0.7 }}
               viewport={{ once: true }}
             >
-              <div className="rounded-2xl overflow-hidden h-full border border-white/10">
-                <div className="bg-gray-800 h-96 flex items-center justify-center">
+              <div className={`rounded-2xl overflow-hidden h-full border ${cardBorder}`}>
+                <div className={`${
+                  isDark ? 'bg-dark-lighter' : 'bg-light-darker'
+                } h-96 flex items-center justify-center`}>
                   <div className="text-center">
-                    <div className="bg-gray-200 border-2 border-dashed rounded-xl w-16 h-16 mx-auto mb-4" />
+                    <div className={`${
+                      isDark ? 'bg-white/10' : 'bg-dark/10'
+                    } rounded-xl w-16 h-16 mx-auto mb-4 flex items-center justify-center`}>
+                      <div className="w-6 h-6 rounded-full bg-gradient-to-r from-primary to-accent" />
+                    </div>
                     <h3 className="text-xl font-bold mb-2">Our Headquarters</h3>
-                    <p className="text-white/80 mb-4">123 Innovation Street, Tech City</p>
-                    <div className="bg-gray-200 border-2 border-dashed rounded-xl w-full h-64" />
+                    <p className={mutedTextColor}>123 Innovation Street, Tech City</p>
+                    <div className={`${
+                      isDark ? 'bg-white/10' : 'bg-dark/10'
+                    } rounded-xl w-full h-64 mt-4 flex items-center justify-center`}>
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-r from-primary to-accent flex items-center justify-center">
+                        <MapPin className="text-dark" size={24} />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
               
-              <div className="mt-8 bg-dark/80 backdrop-blur-sm border border-white/10 rounded-2xl p-6">
+              <div className={`mt-8 ${cardBg} backdrop-blur-sm border ${cardBorder} rounded-2xl p-6`}>
                 <h3 className="text-xl font-bold mb-4">Why Choose Us</h3>
                 <ul className="space-y-3">
                   {[
@@ -302,10 +344,12 @@ const ContactPage = () => {
                     'Transparent pricing with no hidden fees'
                   ].map((item, index) => (
                     <li key={index} className="flex items-start">
-                      <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center mt-1 mr-3">
+                      <div className={`w-5 h-5 rounded-full ${
+                        isDark ? 'bg-primary/10' : 'bg-primary/5'
+                      } flex items-center justify-center mt-1 mr-3`}>
                         <div className="w-1.5 h-1.5 rounded-full bg-primary" />
                       </div>
-                      <span className="text-white/90">{item}</span>
+                      <span className={textColor}>{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -317,7 +361,9 @@ const ContactPage = () => {
 
       {/* FAQ Section */}
       <section className="py-64 relative">
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-dark/20 to-dark z-0" />
+        <div className={`absolute top-0 left-0 w-full h-full bg-gradient-to-b ${
+          isDark ? 'from-dark/20' : 'from-light/20'
+        } to-transparent z-0`} />
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-16">
@@ -352,10 +398,10 @@ const ContactPage = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="bg-dark/80 backdrop-blur-sm border border-white/10 rounded-xl p-6"
+                  className={`${cardBg} backdrop-blur-sm border ${cardBorder} rounded-xl p-6`}
                 >
                   <h3 className="text-xl font-bold mb-3">{faq.question}</h3>
-                  <p className="text-white/80">{faq.answer}</p>
+                  <p className={mutedTextColor}>{faq.answer}</p>
                 </motion.div>
               ))}
             </div>
@@ -365,7 +411,9 @@ const ContactPage = () => {
 
       {/* CTA Section */}
       <section className="py-16 relative">
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-accent/10 z-0" />
+        <div className={`absolute inset-0 ${
+          isDark ? 'bg-gradient-to-r from-primary/10 to-accent/10' : 'bg-gradient-to-r from-primary/5 to-accent/5'
+        } z-0`} />
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <motion.div
@@ -378,7 +426,7 @@ const ContactPage = () => {
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
                 Ready to <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Transform</span> Your Business?
               </h2>
-              <p className="text-xl text-white/80 max-w-2xl mx-auto">
+              <p className={`text-xl ${mutedTextColor} max-w-2xl mx-auto`}>
                 Schedule a free consultation with our experts and discover how we can help you achieve your goals.
               </p>
             </motion.div>
@@ -393,7 +441,11 @@ const ContactPage = () => {
               <button className="bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary text-dark font-bold py-4 px-8 rounded-full transition-all duration-300 transform hover:-translate-y-0.5 shadow-lg hover:shadow-xl text-lg">
                 Schedule a Call
               </button>
-              <button className="bg-transparent border-2 border-white/20 hover:border-primary text-white font-bold py-4 px-8 rounded-full transition-all duration-300 hover:text-primary text-lg">
+              <button className={`bg-transparent border-2 ${
+                isDark ? 'border-white/20' : 'border-dark/20'
+              } hover:border-primary ${textColor} font-bold py-4 px-8 rounded-full transition-all duration-300 ${
+                isDark ? 'hover:text-primary' : 'hover:text-primary-dark'
+              } text-lg`}>
                 View Case Studies
               </button>
             </motion.div>
