@@ -275,7 +275,8 @@ const AboutSection = () => {
                   
                   {/* Social links */}
                   <div className="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                    {['linkedin', 'twitter', 'dribbble'].map((social, i) => (
+                    {/* {['linkedin', 'twitter', 'dribbble'].map((social, i) => ( */}
+                    {['linkedin', 'twitter', 'dribbble'].map((i) => (
                       <div
                         key={i}
                         className={`w-10 h-10 rounded-full ${
