@@ -47,13 +47,13 @@ const ContactPage = () => {
     {
       icon: <Mail className="text-primary" size={24} />,
       title: 'Email Us',
-      details: ['contact@Smplics.com', 'support@Smplics.com'],
+      details: ['info@smplics.com', 'support@Smplics.com'],
       action: 'Send a message'
     },
     {
       icon: <Phone className="text-primary" size={24} />,
       title: 'Call Us',
-      details: ['+1 (555) 123-4567', '+1 (555) 987-6543'],
+      details: ['+9 (71) 58584-0433', '+9 (71) 58584-0433'],
       action: 'Call now'
     },
     {
