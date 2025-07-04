@@ -47,12 +47,12 @@ const AboutSection = () => {
     },
   ];
 
-  const team = [
-    { name: 'Alex Morgan', role: 'Founder & CEO', image: 'team1' },
-    { name: 'Taylor Kim', role: 'CTO', image: 'team2' },
-    { name: 'Jordan Smith', role: 'Creative Director', image: 'team3' },
-    { name: 'Casey Johnson', role: 'Lead Developer', image: 'team4' },
-  ];
+  // const team = [
+  //   { name: 'Alex Morgan', role: 'Founder & CEO', image: 'team1' },
+  //   { name: 'Taylor Kim', role: 'CTO', image: 'team2' },
+  //   { name: 'Jordan Smith', role: 'Creative Director', image: 'team3' },
+  //   { name: 'Casey Johnson', role: 'Lead Developer', image: 'team4' },
+  // ];
 
   return (
     <section className={`py-20 ${bgColor} ${textColor} relative overflow-hidden`} >
@@ -87,7 +87,7 @@ const AboutSection = () => {
             viewport={{ once: true }}
             className="text-4xl md:text-5xl font-bold mb-6"
           >
-            Crafting Digital <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Excellence</span> Since 2012
+            Crafting Digital <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Excellence</span> Since 2022
           </motion.h2>
           
           <motion.p
@@ -113,7 +113,7 @@ const AboutSection = () => {
             >
               <h3 className="text-3xl font-bold mb-4">Our Journey</h3>
               <p className={`${mutedTextColor} mb-6`}>
-                Founded in 2012 with a vision to revolutionize digital experiences, we've grown from a small garage startup to an industry leader with global reach.
+                Founded in 2022 with a vision to revolutionize digital experiences, we've grown from a small garage startup to an industry leader with global reach.
               </p>
             </motion.div>
             
@@ -122,11 +122,11 @@ const AboutSection = () => {
               <div className={`absolute left-5 top-0 bottom-0 w-0.5 ${timelineBg} z-0`} />
               
               {[
-                { year: '2012', title: 'Company Founded', description: 'Started in a small office with just 3 team members and big dreams.' },
-                { year: '2014', title: 'First Major Client', description: 'Secured partnership with Fortune 500 company, marking our breakthrough.' },
-                { year: '2016', title: 'Global Expansion', description: 'Opened international offices in Europe and Asia.' },
+                { year: '2022', title: 'Company Founded', description: 'Started in a small office with just 3 team members and big dreams.' },
+                { year: '2023', title: 'First Major Client', description: 'Secured partnership with Fortune 500 company, marking our breakthrough.' },
+                { year: '2024', title: 'Global Expansion', description: 'Opened international offices in Europe and Asia.' },
                 { year: '2020', title: 'Digital Transformation Leader', description: 'Recognized as industry leader in digital innovation.' },
-                { year: '2023', title: 'AI Integration', description: 'Pioneered AI-driven solutions for enhanced customer experiences.' },
+                { year: '2025', title: 'AI Integration', description: 'Pioneered AI-driven solutions for enhanced customer experiences.' },
               ].map((item, index) => (
                 <motion.div
                   key={index}
@@ -234,7 +234,7 @@ const AboutSection = () => {
         </div>
         
         {/* Team Section */}
-        <div className="mb-16">
+        {/* <div className="mb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -274,24 +274,24 @@ const AboutSection = () => {
                   </div>
                   
                   {/* Social links */}
-                  <div className="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300">
+                  {/* <div className="absolute top-4 right-4 flex flex-col gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300"> */}
                     {/* {['linkedin', 'twitter', 'dribbble'].map((social, i) => ( */}
-                    {['linkedin', 'twitter', 'dribbble'].map((i) => (
-                      <div
-                        key={i}
-                        className={`w-10 h-10 rounded-full ${
-                          isDark ? 'bg-dark/80' : 'bg-light/80'
-                        } backdrop-blur-sm flex items-center justify-center hover:bg-primary transition-colors`}
+                    {/* {['linkedin', 'twitter', 'dribbble'].map((i) => ( */}
+                      {/* <div */}
+                        {/* key={i} */}
+                        {/* className={`w-10 h-10 rounded-full ${ */}
+                          {/* isDark ? 'bg-dark/80' : 'bg-light/80' */}
+                        {/* } backdrop-blur-sm flex items-center justify-center hover:bg-primary transition-colors`}
                       >
                         <div className="w-4 h-4 rounded-full bg-gradient-to-r from-primary to-accent" />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
+                      </div> */}
+                    {/* ))} */}
+                  {/* </div>
+                </div> */}
+              {/* </motion.div> */}
+            {/* ))} */}
+          {/* </div> */}
+        {/* </div>  */}
         
         {/* Stats */}
         <motion.div
