@@ -1,8 +1,8 @@
 // src/features/about/AboutSection.tsx
 import { motion } from 'framer-motion';
-import { Briefcase, Globe, Users, BarChart2, Award } from 'react-feather';
+// import { Briefcase, Globe, Users, BarChart2, Award } from 'react-feather';
 import { useTheme } from '../../constants/ThemeContext';
-import logo from '@/assets/logo.png';
+// import logo from '@/assets/logo.png';
 
 const AboutSection = () => {
   const { theme } = useTheme();
@@ -12,40 +12,40 @@ const AboutSection = () => {
   const bgColor = isDark ? 'bg-dark' : 'bg-light';
   const textColor = isDark ? 'text-white' : 'text-dark';
   const mutedTextColor = isDark ? 'text-white/80' : 'text-dark/70';
-  const cardBg = isDark ? 'bg-dark/80' : 'bg-light/80';
-  const cardBorder = isDark ? 'border-white/10' : 'border-dark/10';
-  const timelineBg = isDark ? 'bg-white/10' : 'bg-dark/10';
+  // const cardBg = isDark ? 'bg-dark/80' : 'bg-light/80';
+  // const cardBorder = isDark ? 'border-white/10' : 'border-dark/10';
+  // const timelineBg = isDark ? 'bg-white/10' : 'bg-dark/10';
 
-  const stats = [
-    { value: 15, label: 'Years Experience', icon: <Briefcase className="text-primary" size={24} /> },
-    { value: 500, label: 'Projects Delivered', icon: <Globe className="text-primary" size={24} /> },
-    { value: 40, label: 'Team Experts', icon: <Users className="text-primary" size={24} /> },
-    { value: 98, label: 'Client Satisfaction', icon: <BarChart2 className="text-primary" size={24} /> },
-    { value: 24, label: 'Awards Won', icon: <Award className="text-primary" size={24} /> },
-  ];
+  // const stats = [
+  //   { value: 15, label: 'Years Experience', icon: <Briefcase className="text-primary" size={24} /> },
+  //   { value: 500, label: 'Projects Delivered', icon: <Globe className="text-primary" size={24} /> },
+  //   { value: 40, label: 'Team Experts', icon: <Users className="text-primary" size={24} /> },
+  //   { value: 98, label: 'Client Satisfaction', icon: <BarChart2 className="text-primary" size={24} /> },
+  //   { value: 24, label: 'Awards Won', icon: <Award className="text-primary" size={24} /> },
+  // ];
 
-  const values = [
-    {
-      title: 'Innovation',
-      description: 'We embrace cutting-edge technologies and creative thinking to solve complex challenges.',
-      color: 'from-primary to-accent',
-    },
-    {
-      title: 'Excellence',
-      description: 'Quality is at the core of everything we do, from concept to delivery.',
-      color: 'from-purple-500 to-indigo-600',
-    },
-    {
-      title: 'Integrity',
-      description: 'We build trust through transparency, honesty, and ethical business practices.',
-      color: 'from-cyan-500 to-blue-600',
-    },
-    {
-      title: 'Collaboration',
-      description: 'Great things happen when diverse minds work together towards a common goal.',
-      color: 'from-green-500 to-teal-600',
-    },
-  ];
+  // const values = [
+  //   {
+  //     title: 'Innovation',
+  //     description: 'We embrace cutting-edge technologies and creative thinking to solve complex challenges.',
+  //     color: 'from-primary to-accent',
+  //   },
+  //   {
+  //     title: 'Excellence',
+  //     description: 'Quality is at the core of everything we do, from concept to delivery.',
+  //     color: 'from-purple-500 to-indigo-600',
+  //   },
+  //   {
+  //     title: 'Integrity',
+  //     description: 'We build trust through transparency, honesty, and ethical business practices.',
+  //     color: 'from-cyan-500 to-blue-600',
+  //   },
+  //   {
+  //     title: 'Collaboration',
+  //     description: 'Great things happen when diverse minds work together towards a common goal.',
+  //     color: 'from-green-500 to-teal-600',
+  //   },
+  // ];
 
   // const team = [
   //   { name: 'Alex Morgan', role: 'Founder & CEO', image: 'team1' },
@@ -102,7 +102,8 @@ const AboutSection = () => {
         </div>
         
         {/* Timeline */}
-        <div className="flex flex-col md:flex-row gap-10 mb-20">
+        {/*--start time line 
+            <div className="flex flex-col md:flex-row gap-10 mb-20">
           <div className="md:w-1/2">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -119,7 +120,7 @@ const AboutSection = () => {
             
             <div className="relative">
               {/* Timeline line */}
-              <div className={`absolute left-5 top-0 bottom-0 w-0.5 ${timelineBg} z-0`} />
+              {/* <div className={`absolute left-5 top-0 bottom-0 w-0.5 ${timelineBg} z-0`} />
               
               {[
                 { year: '2022', title: 'Company Founded', description: 'Started in a small office with just 3 team members and big dreams.' },
@@ -157,9 +158,9 @@ const AboutSection = () => {
             >
               <div className={`${
                 isDark ? 'bg-dark-lighter' : 'bg-light-darker'
-              } border-2 ${cardBorder} rounded-xl w-full h-full min-h-[500px] flex items-center justify-center`}>
+              } border-2 ${cardBorder} rounded-xl w-full h-full min-h-[500px] flex items-center justify-center`}> */}
                 {/* Company Vision Placeholder */}
-                <div className="text-center p-8">
+                {/* <div className="text-center p-8"> */}
                   {/* <div className="mb-6">
                     <div className="bg-gradient-to-r from-primary to-accent w-16 h-16 rounded-full mx-auto flex items-center justify-center">
                       <div className="bg-white w-14 h-14 rounded-full flex items-center justify-center">
@@ -175,14 +176,14 @@ const AboutSection = () => {
                   {/* <img src={logo} alt="Company Vision Image" /> */}
                   {/* <div className="bg-gray-200 border-2 border-dashed rounded-xl w-full h-full min-h-[500px] flex items-center justify-center text-dark"> */}
                 {/* Company Vision Image */}
-                      <img src={logo} alt="Company Vision Image" />
+                      {/* <img src={logo} alt="Company Vision Image" /> */}
                   {/* </div> */}
 
-                </div>
+                {/* </div>
               </div>
-              
+               */}
               {/* Floating elements */}
-              <div className={`absolute -top-6 -right-6 w-32 h-32 ${
+              {/* <div className={`absolute -top-6 -right-6 w-32 h-32 ${
                 isDark ? 'bg-primary/20' : 'bg-primary/10'
               } rounded-lg rotate-12 z-0 backdrop-blur-sm`} />
               <div className={`absolute -bottom-6 -left-6 w-40 h-40 ${
@@ -190,7 +191,9 @@ const AboutSection = () => {
               } rounded-full z-0 backdrop-blur-sm`} />
             </motion.div>
           </div>
-        </div>
+        </div> */}
+
+        {/* --endtimeline */} 
         
         {/* Core Values */}
         <div className="mb-20">
@@ -207,7 +210,7 @@ const AboutSection = () => {
             </p>
           </motion.div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {values.map((value, index) => (
               <motion.div
                 key={index}
@@ -230,7 +233,7 @@ const AboutSection = () => {
                 <p className={mutedTextColor}>{value.description}</p>
               </motion.div>
             ))}
-          </div>
+          </div> */}
         </div>
         
         {/* Team Section */}
@@ -294,7 +297,7 @@ const AboutSection = () => {
         {/* </div>  */}
         
         {/* Stats */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -314,7 +317,7 @@ const AboutSection = () => {
               </div>
             ))}
           </div>
-        </motion.div>
+        </motion.div> */}
       </div>
     </section>
   );

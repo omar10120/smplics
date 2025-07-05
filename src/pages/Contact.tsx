@@ -1,7 +1,7 @@
 // src/pages/Contact.tsx
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { Mail, Phone, MapPin, Clock, Send, Check } from 'react-feather';
+import { Mail, Phone, MapPin, Clock, Send, Check, Calendar } from 'react-feather';
 import { useTheme } from '../constants/ThemeContext';
 
 const ContactPage = () => {
@@ -11,10 +11,13 @@ const ContactPage = () => {
     name: '',
     email: '',
     subject: '',
-    message: ''
+    message: '',
+    datetime: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [showCalendar, setShowCalendar] = useState(false);
+  const [selectedDateTime, setSelectedDateTime] = useState('');
 
   // Theme-aware colors
   const bgColor = isDark ? 'bg-dark' : 'bg-light';
@@ -28,19 +31,65 @@ const ContactPage = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleDateTimeSelect = (dateTime: string) => {
+    setSelectedDateTime(dateTime);
+    setFormData(prev => ({ ...prev, datetime: dateTime }));
+    setShowCalendar(false);
+  };
+
+  const sendEmail = async (data: typeof formData) => {
+    // Prepare email content
+    const emailContent = `
+      New Contact Form Submission:
+      
+      Name: ${data.name}
+      Email: ${data.email}
+      Subject: ${data.subject}
+      Message: ${data.message}
+      Meeting Time: ${data.datetime || 'Not specified'}
+      
+      Sent from Smplics website
+    `;
+
+    try {
+      // Use EmailJS or your email sending service
+      // This is a placeholder - you'll need to implement actual email sending
+      console.log('Sending email to info@smplics.com', emailContent);
+      
+      // For demonstration, we'll simulate the email sending
+      return true;
+    } catch (error) {
+      console.error('Failed to send email:', error);
+      return false;
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
+    try {
+      // Send form data to your backend/email service
+      const emailSent = await sendEmail(formData);
+      
+      if (emailSent) {
+        setIsSubmitted(true);
+        setFormData({ name: '', email: '', subject: '', message: '', datetime: '' });
+        setSelectedDateTime('');
+      } else {
+        alert('Failed to send message. Please try again later.');
+      }
+    } catch (error) {
+      console.error('Form submission error:', error);
+      alert('An error occurred. Please try again.');
+    } finally {
       setIsSubmitting(false);
-      setIsSubmitted(true);
-      setFormData({ name: '', email: '', subject: '', message: '' });
       
       // Reset success message after 5 seconds
-      setTimeout(() => setIsSubmitted(false), 5000);
-    }, 1500);
+      if (isSubmitted) {
+        setTimeout(() => setIsSubmitted(false), 5000);
+      }
+    }
   };
 
   const contactInfo = [
@@ -53,19 +102,13 @@ const ContactPage = () => {
     {
       icon: <Phone className="text-primary" size={24} />,
       title: 'Call Us',
-      details: ['+9 (71) 58584-0433', '+9 (71) 58584-0433'],
+      details: ['+(971) 58584-0433', '+(971) 58584-0433'],
       action: 'Call now'
-    },
-    {
-      icon: <MapPin className="text-primary" size={24} />,
-      title: 'Visit Us',
-      details: ['123 Innovation Street', 'Tech City, TC 10001'],
-      action: 'Get directions'
     },
     {
       icon: <Clock className="text-primary" size={24} />,
       title: 'Working Hours',
-      details: ['Monday-Friday: 9am - 6pm', 'Saturday: 10am - 4pm', 'Sunday: Closed'],
+      details: ['Sunday-thursday: 10am - 5pm', 'Friday: Closed'],
       action: 'Book appointment'
     }
   ];
@@ -140,7 +183,7 @@ const ContactPage = () => {
       {/* Contact Information */}
       <section className="py-16 relative">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {contactInfo.map((item, index) => (
               <motion.div
                 key={index}
@@ -262,6 +305,56 @@ const ContactPage = () => {
                     />
                   </div>
                   
+                  {/* Google Calendar Booking */}
+                  <div className="mb-6">
+                    <label className={`block text-sm font-medium mb-2 ${textColor}`}>
+                      Preferred Meeting Time
+                    </label>
+                    
+                    <div className="flex gap-3">
+                      <input
+                        type="text"
+                        value={selectedDateTime || "Select date and time"}
+                        readOnly
+                        className={`w-full ${
+                          isDark ? 'bg-dark/50' : 'bg-light/50'
+                        } border ${cardBorder} rounded-lg px-4 py-3 cursor-pointer ${textColor}`}
+                        onClick={() => setShowCalendar(!showCalendar)}
+                      />
+                      
+                      <button
+                        type="button"
+                        onClick={() => setShowCalendar(!showCalendar)}
+                        className={`flex items-center gap-2 ${
+                          isDark ? 'bg-dark/70' : 'bg-light/70'
+                        } border ${cardBorder} px-4 rounded-lg transition-all hover:border-primary`}
+                      >
+                        <Calendar size={18} />
+                        {selectedDateTime ? "Change" : "Select"}
+                      </button>
+                    </div>
+                    
+                    {showCalendar && (
+                      <div className="mt-4">
+                        <div className="text-center mb-3 text-sm text-primary">
+                          Choose from available slots
+                        </div>
+                        <div className="border rounded-lg overflow-hidden">
+                          <iframe
+                            src="https://calendar.app.google/Roea7sNHRwXBHSV28"
+                            width="100%"
+                            height="400"
+                            frameBorder="0"
+                            className="rounded-lg"
+                          ></iframe>
+                        </div>
+                        <div className="mt-3 text-sm text-center text-gray-500">
+                          Powered by Google Calendar
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                  
                   <div className="mb-6">
                     <label htmlFor="message" className={`block text-sm font-medium mb-2 ${textColor}`}>Your Message</label>
                     <textarea
@@ -341,7 +434,8 @@ const ContactPage = () => {
                     'Dedicated support team available 24/7',
                     'Proven track record with Fortune 500 companies',
                     'Custom solutions tailored to your business needs',
-                    'Transparent pricing with no hidden fees'
+                    'Transparent pricing with no hidden fees',
+                    'Flexible meeting scheduling'
                   ].map((item, index) => (
                     <li key={index} className="flex items-start">
                       <div className={`w-5 h-5 rounded-full ${
@@ -360,7 +454,7 @@ const ContactPage = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-64 relative">
+      <section className="py- relative">
         <div className={`absolute top-0 left-0 w-full h-full bg-gradient-to-b ${
           isDark ? 'from-dark/20' : 'from-light/20'
         } to-transparent z-0`} />
@@ -405,50 +499,6 @@ const ContactPage = () => {
                 </motion.div>
               ))}
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 relative">
-        <div className={`absolute inset-0 ${
-          isDark ? 'bg-gradient-to-r from-primary/10 to-accent/10' : 'bg-gradient-to-r from-primary/5 to-accent/5'
-        } z-0`} />
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              viewport={{ once: true }}
-              className="mb-8"
-            >
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                Ready to <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Transform</span> Your Business?
-              </h2>
-              <p className={`text-xl ${mutedTextColor} max-w-2xl mx-auto`}>
-                Schedule a free consultation with our experts and discover how we can help you achieve your goals.
-              </p>
-            </motion.div>
-            
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              viewport={{ once: true }}
-              className="flex flex-col sm:flex-row justify-center gap-4"
-            >
-              <button className="bg-gradient-to-r from-primary to-accent hover:from-accent hover:to-primary text-dark font-bold py-4 px-8 rounded-full transition-all duration-300 transform hover:-translate-y-0.5 shadow-lg hover:shadow-xl text-lg">
-                Schedule a Call
-              </button>
-              <button className={`bg-transparent border-2 ${
-                isDark ? 'border-white/20' : 'border-dark/20'
-              } hover:border-primary ${textColor} font-bold py-4 px-8 rounded-full transition-all duration-300 ${
-                isDark ? 'hover:text-primary' : 'hover:text-primary-dark'
-              } text-lg`}>
-                View Case Studies
-              </button>
-            </motion.div>
           </div>
         </div>
       </section>

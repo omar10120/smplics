@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { Code, Framer, Phone, BarChart2, Server, Cloud, Lock, HelpCircle } from 'react-feather';
+import { Code, Framer, Phone, Server, Cloud, Lock ,PieChart} from 'react-feather';
+// BarChart2 HelpCircle
 import { useTheme } from '../../constants/ThemeContext';
 
 const ServicesSection = () => {
@@ -21,7 +22,7 @@ const ServicesSection = () => {
     { id: 'all', label: 'All Services' },
     { id: 'design', label: 'Design' },
     { id: 'development', label: 'Development' },
-    { id: 'marketing', label: 'Marketing' },
+    // { id: 'marketing', label: 'Marketing' },
   ];
 
   const services = [
@@ -49,14 +50,14 @@ const ServicesSection = () => {
       category: 'development',
       features: ['React Native', 'Flutter', 'iOS Swift', 'Android Kotlin', 'PWA Development'],
     },
-    {
-      id: 4,
-      title: 'Digital Marketing',
-      description: 'Data-driven marketing strategies to increase visibility and drive targeted traffic.',
-      icon: <BarChart2 className="text-primary" size={24} />,
-      category: 'marketing',
-      features: ['SEO Optimization', 'PPC Campaigns', 'Social Media', 'Content Strategy', 'Analytics'],
-    },
+    // {
+    //   id: 4,
+    //   title: 'Digital Marketing',
+    //   description: 'Data-driven marketing strategies to increase visibility and drive targeted traffic.',
+    //   icon: <BarChart2 className="text-primary" size={24} />,
+    //   category: 'marketing',
+    //   features: ['SEO Optimization', 'PPC Campaigns', 'Social Media', 'Content Strategy', 'Analytics'],
+    // },
     {
       id: 5,
       title: 'Cloud Solutions',
@@ -81,14 +82,28 @@ const ServicesSection = () => {
       category: 'development',
       features: ['Penetration Testing', 'Security Audits', 'Compliance', 'Encryption', 'Firewalls'],
     },
+    // {
+    //   id: 8,
+    //   title: 'Support & Maintenance',
+    //   description: 'Ongoing support and optimization to keep your digital products running smoothly.',
+    //   icon: <HelpCircle className="text-primary" size={24} />,
+    //   category: 'marketing',
+    //   features: ['Performance Monitoring', 'Bug Fixes', 'Updates', 'Backups', '24/7 Support'],
+    // },
     {
-      id: 8,
-      title: 'Support & Maintenance',
-      description: 'Ongoing support and optimization to keep your digital products running smoothly.',
-      icon: <HelpCircle className="text-primary" size={24} />,
-      category: 'marketing',
-      features: ['Performance Monitoring', 'Bug Fixes', 'Updates', 'Backups', '24/7 Support'],
-    },
+    id: 9, 
+    title: 'Brand Identity',
+    description: 'Develop cohesive brand systems that communicate your core values and differentiate your business in the market.',
+    icon: <PieChart className="text-primary" size={24} />, 
+    category: 'design',
+    features: [
+      'Logo Design', 
+      'Color Palette Creation', 
+      'Typography System', 
+      'Brand Guidelines', 
+      'Visual Asset Development'
+    ],
+  },
   ];
 
   const filteredServices = activeTab === 'all' 

@@ -15,7 +15,7 @@ const Home = () => {
   const cardBorder = isDark ? 'border-white/10' : 'border-dark/10';
   
   return (
-    <section className="relative min-h-screen overflow-hidden">
+    <section className="relative min-h-screen overflow-hidden" id="hero-section">
       {/* Background with logo pattern */}
       <div 
         className="absolute inset-0 z-0 opacity-[0.03] dark:opacity-[0.05]"

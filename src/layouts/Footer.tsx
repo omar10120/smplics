@@ -15,38 +15,38 @@ const Footer = () => {
   // const cardBg = isDark ? 'bg-dark/80' : 'bg-light/80';
   const cardBorder = isDark ? 'border-white/10' : 'border-dark/10';
   
-  const footerLinks = [
-    {
-      title: 'Company',
-      links: [
-        { name: 'About Us', to: '/about' },
-        { name: 'Our Team', to: '/team' },
-        { name: 'Careers', to: '/careers' },
-        { name: 'Press', to: '/press' },
-        { name: 'Contact', to: '/contact' },
-      ]
-    },
-    {
-      title: 'Services',
-      links: [
-        { name: 'Web Development', to: '/services/web' },
-        { name: 'Mobile Apps', to: '/services/mobile' },
-        { name: 'UI/UX Design', to: '/services/design' },
-        { name: 'Cloud Solutions', to: '/services/cloud' },
-        { name: 'Digital Marketing', to: '/services/marketing' },
-      ]
-    },
-    {
-      title: 'Resources',
-      links: [
-        { name: 'Blog', to: '/blog' },
-        { name: 'Case Studies', to: '/case-studies' },
-        { name: 'Whitepapers', to: '/whitepapers' },
-        { name: 'Webinars', to: '/webinars' },
-        { name: 'Documentation', to: '/docs' },
-      ]
-    }
-  ];
+  // const footerLinks = [
+  //   {
+  //     title: 'Company',
+  //     links: [
+  //       { name: 'About Us', to: '/about' },
+  //       { name: 'Our Team', to: '/team' },
+  //       { name: 'Careers', to: '/careers' },
+  //       { name: 'Press', to: '/press' },
+  //       { name: 'Contact', to: '/contact' },
+  //     ]
+  //   },
+  //   {
+  //     title: 'Services',
+  //     links: [
+  //       { name: 'Web Development', to: '/services/web' },
+  //       { name: 'Mobile Apps', to: '/services/mobile' },
+  //       { name: 'UI/UX Design', to: '/services/design' },
+  //       { name: 'Cloud Solutions', to: '/services/cloud' },
+  //       { name: 'Digital Marketing', to: '/services/marketing' },
+  //     ]
+  //   },
+  //   {
+  //     title: 'Resources',
+  //     links: [
+  //       { name: 'Blog', to: '/blog' },
+  //       { name: 'Case Studies', to: '/case-studies' },
+  //       { name: 'Whitepapers', to: '/whitepapers' },
+  //       { name: 'Webinars', to: '/webinars' },
+  //       { name: 'Documentation', to: '/docs' },
+  //     ]
+  //   }
+  // ];
 
   const socialLinks = [
     { name: 'Twitter', icon: 'Twitter', url: '#' },
@@ -85,7 +85,7 @@ const Footer = () => {
               </div>
               <div>
                 <p className="font-medium">Call us anytime</p>
-                <p className="text-primary">+9 (71) 58584-0433</p>
+                <p className="text-primary">+(971) 58584-0433</p>
               </div>
             </div>
             
@@ -103,7 +103,7 @@ const Footer = () => {
           </div>
           
           {/* Footer links */}
-          {footerLinks.map((column, colIndex) => (
+          {/* {footerLinks.map((column, colIndex) => (
             <motion.div
               key={colIndex}
               initial={{ opacity: 0, y: 20 }}
@@ -129,7 +129,7 @@ const Footer = () => {
                 ))}
               </ul>
             </motion.div>
-          ))}
+          ))} */}
           
           {/* Newsletter */}
           <motion.div
@@ -198,7 +198,7 @@ const Footer = () => {
               &copy; {currentYear} Smplics. All rights reserved.
             </p>
             
-            <div className="flex flex-wrap justify-center gap-6">
+            {/* <div className="flex flex-wrap justify-center gap-6">
               {['Privacy Policy', 'Terms of Service', 'Cookie Policy', 'Sitemap'].map((item, index) => (
                 <a 
                   key={index}
@@ -208,7 +208,7 @@ const Footer = () => {
                   {item}
                 </a>
               ))}
-            </div>
+            </div> */}
             
             <div className="flex items-center gap-2">
               <span className={`${mutedTextColor} text-sm`}>Designed with</span>
