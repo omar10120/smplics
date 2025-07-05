@@ -31,11 +31,11 @@ const ContactPage = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleDateTimeSelect = (dateTime: string) => {
-    setSelectedDateTime(dateTime);
-    setFormData(prev => ({ ...prev, datetime: dateTime }));
-    setShowCalendar(false);
-  };
+  // const handleDateTimeSelect = (dateTime: string) => {
+  //   setSelectedDateTime(dateTime);
+  //   setFormData(prev => ({ ...prev, datetime: dateTime }));
+  //   setShowCalendar(false);
+  // };
 
   const sendEmail = async (data: typeof formData) => {
     // Prepare email content
