@@ -165,7 +165,7 @@ const Footer = () => {
             </form>
             
             <div>
-              <h4 className="font-medium mb-3">Follow us</h4>
+              <h4 className="font-medium mb-3">Follow us test</h4>
               <div className="flex flex-wrap gap-3">
                 {socialLinks.map((social, index) => (
                   <motion.a
