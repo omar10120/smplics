@@ -458,7 +458,7 @@ const ContactPage = () => {
         <div className={`absolute top-0 left-0 w-full h-full bg-gradient-to-b ${
           isDark ? 'from-dark/20' : 'from-light/20'
         } to-transparent z-0`} />
-        <div className="container mx-auto px-4 relative z-10">
+        <div className="container mx-auto px-4 relative z-10 pt-96 pb-16">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-16">
               <motion.div
